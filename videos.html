@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vídeos - Hacker Portal</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #1a1a1a, #3d3d3d);
+            color: #f4f4f4;
+        }
+
+        .video-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 50px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            padding: 10px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #2980b9;
+            outline: none;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .video-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-title {
+            padding: 10px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background: #45a049;
+        }
+
+        @media (max-width: 600px) {
+            .search-box input {
+                width: 100%; /* Ajusta a largura para telas menores */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <h1>Vídeos</h1>
+
+        <!-- Barra de Pesquisa -->
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Pesquisar vídeos...">
+        </div>
+
+        <!-- Lista de Vídeos -->
+        <div class="video-grid" id="video-list">
+            <div class="video-card" data-link="2024-09-25 00-52-46.mp4">
+                <img src="36ab3b27-1b2a-4876-afd2-c9552c5c7c38.jfif" alt="Thumbnail Vídeo 1">
+                <div class="video-title">Vídeo 1: Título do Vídeo 1...</div>
+            </div>
+            <div class="video-card" data-link="videos/video2.mp4">
+                <img src="videos/thumb_video2.jpg" alt="Thumbnail Vídeo 2">
+                <div class="video-title">Vídeo 2: Título do Vídeo 2...</div>
+            </div>
+            <div class="video-card" data-link="videos/video3.mp4">
+                <img src="videos/thumb_video3.jpg" alt="Thumbnail Vídeo 3">
+                <div class="video-title">Vídeo 3: Título do Vídeo 3...</div>
+            </div>
+            <div class="video-card" data-link="videos/video4.mp4">
+                <img src="videos/thumb_video4.jpg" alt="Thumbnail Vídeo 4">
+                <div class="video-title">Vídeo 4: Título do Vídeo 4...</div>
+            </div>
+            <div class="video-card" data-link="videos/video5.mp4">
+                <img src="videos/thumb_video5.jpg" alt="Thumbnail Vídeo 5">
+                <div class="video-title">Vídeo 5: Título do Vídeo 5...</div>
+            </div>
+            <!-- Adicione mais vídeos conforme necessário -->
+        </div>
+
+        <!-- Botão para voltar ao início -->
+        <a href="main.html" class="back-button">Voltar para o Início</a>
+    </div>
+
+    <script>
+        // Script de busca
+        document.getElementById('search-input').addEventListener('input', function() {
+            const searchValue = this.value.toLowerCase();
+            const videoListItems = document.querySelectorAll('.video-card');
+
+            videoListItems.forEach(function(item) {
+                const itemText = item.querySelector('.video-title').textContent.toLowerCase();
+                if (itemText.includes(searchValue)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Função para abrir o vídeo ao clicar em um item da lista
+        document.querySelectorAll('.video-card').forEach(item => {
+            item.addEventListener('click', function() {
+                const link = this.getAttribute('data-link'); // Pega o link associado
+                window.open(link, '_blank'); // Abre o vídeo
+            });
+        });
+    </script>
+</body>
+</html>

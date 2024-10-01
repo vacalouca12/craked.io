@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotos - Hacker Portal</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #1a1a1a, #3d3d3d);
+            color: #f4f4f4;
+        }
+
+        .photo-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 50px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            padding: 10px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #2980b9;
+            outline: none;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .photo-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .photo-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .photo-title {
+            padding: 10px;
+            text-align: left;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transition: background 0.3s;
+        }
+
+        .photo-title:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background: #45a049;
+        }
+
+        @media (max-width: 600px) {
+            .search-box input {
+                width: 100%; /* Ajusta a largura para telas menores */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="photo-container">
+        <h1>Fotos</h1>
+
+        <!-- Barra de Pesquisa -->
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Pesquisar fotos...">
+        </div>
+
+        <!-- Lista de Fotos -->
+        <div class="photo-grid" id="photo-list">
+            <div class="photo-card" data-link="photos/photo1.jpg">
+                <img src="photos/photo1.jpg" alt="Descrição da Foto 1">
+                <div class="photo-title">Foto 1: Título da Foto 1...</div>
+            </div>
+            <div class="photo-card" data-link="photos/photo2.jpg">
+                <img src="photos/photo2.jpg" alt="Descrição da Foto 2">
+                <div class="photo-title">Foto 2: Título da Foto 2...</div>
+            </div>
+            <div class="photo-card" data-link="photos/photo3.jpg">
+                <img src="photos/photo3.jpg" alt="Descrição da Foto 3">
+                <div class="photo-title">Foto 3: Título da Foto 3...</div>
+            </div>
+            <div class="photo-card" data-link="photos/photo4.jpg">
+                <img src="photos/photo4.jpg" alt="Descrição da Foto 4">
+                <div class="photo-title">Foto 4: Título da Foto 4...</div>
+            </div>
+            <div class="photo-card" data-link="photos/photo5.jpg">
+                <img src="photos/photo5.jpg" alt="Descrição da Foto 5">
+                <div class="photo-title">Foto 5: Título da Foto 5...</div>
+            </div>
+            <!-- Adicione mais fotos conforme necessário -->
+        </div>
+
+        <!-- Botão para voltar ao início -->
+        <a href="main.html" class="back-button">Voltar para o Início</a>
+    </div>
+
+    <script>
+        // Script de busca
+        document.getElementById('search-input').addEventListener('input', function() {
+            const searchValue = this.value.toLowerCase();
+            const photoListItems = document.querySelectorAll('.photo-card');
+
+            photoListItems.forEach(function(item) {
+                const itemText = item.querySelector('.photo-title').textContent.toLowerCase();
+                if (itemText.includes(searchValue)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Função para abrir a foto ao clicar em um item da lista
+        document.querySelectorAll('.photo-card').forEach(item => {
+            item.addEventListener('click', function() {
+                const link = this.getAttribute('data-link'); // Pega o link associado
+                window.open(link, '_blank'); // Abre a foto
+            });
+        });
+    </script>
+</body>
+</html>
